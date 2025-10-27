@@ -13,6 +13,7 @@ body {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), 
                 url('https://cdn.pixabay.com/photo/2017/12/15/13/51/polynesia-3021072_1280.jpg') no-repeat center center fixed;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 100vh;
     color: #fff;
     position: relative;
@@ -34,7 +35,8 @@ nav {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 1rem 2.1rem ;
+    padding: 1rem 2rem 1rem 2rem;
+    padding-right: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -666,13 +668,36 @@ nav {
     }
 }
 
+@media (max-width: 968px) {
+    .contact-page-content {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Better background for tablets */
+    body {
+        background-attachment: scroll;
+        background-position: center center;
+    }
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
     }
 
     nav {
-
         flex-direction: column;
         gap: 1rem;
     }
@@ -692,5 +717,58 @@ nav {
 
     .search-btn {
         width: 100%;
+    }
+
+    .suggestions-dropdown {
+        left: 1rem;
+        right: 1rem;
+    }
+    
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), 
+                   url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80') no-repeat center center;
+        background-size: cover;
+        background-size: cover;
+        background-attachment: scroll;
+        background-position: center 20%;
+    }
+    
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .search-section {
+        margin: 2rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-position: center top;
+        background-size: auto 100%;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    nav {
+        padding: 0.8rem 1rem;
     }
 }
