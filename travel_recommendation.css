@@ -685,7 +685,6 @@ nav {
         grid-template-columns: 1fr;
     }
     
-    /* Better background for tablets */
     body {
         background-attachment: scroll;
         background-position: center center;
