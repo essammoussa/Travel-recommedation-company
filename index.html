@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderlust — Curated World Experiences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=Outfit:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="img\wanderlust-icon.svg">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo"><i class="fa-solid fa-paper-plane"></i></div>
+    <div class="loader-text">WANDERLUST</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo"><i class="fa-solid fa-paper-plane"></i> WANDERLUST</a>
+  <div class="nav-center">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#destinations" class="nav-link">Destinations</a>
+    <a href="#experiences" class="nav-link">Experiences</a>
+    <a href="#testimonials" class="nav-link">Stories</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="openBookingModal()">Plan Your Journey</button>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#destinations" onclick="toggleMenu()">Destinations</a>
+  <a href="#experiences" onclick="toggleMenu()">Experiences</a>
+  <a href="#testimonials" onclick="toggleMenu()">Stories</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1528181304800-259b08848526?w=1600&q=80')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium Travel Curation</p>
+    <h1 class="hero-title">Explore the <em>Extraordinary</em></h1>
+    <p class="hero-subtitle">Handcrafted journeys to the world's most captivating destinations. Your story begins here.</p>
+    <div class="hero-search">
+      <div class="search-wrap">
+        <i class="fa fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search destinations, countries, or experiences..." autocomplete="off">
+        <button onclick="searchDestinations()">Search</button>
+      </div>
+      <div id="suggestions" class="suggestions-dropdown"></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Countries</span></div>
+      <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Experiences</span></div>
+      <div class="stat"><span class="stat-num">12K+</span><span class="stat-label">Happy Travelers</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH RESULTS -->
+<section id="searchResults" class="search-results-section" style="display:none">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Search Results</p>
+      <h2 class="section-title" id="searchResultsTitle">Destinations Found</h2>
+      <button class="clear-search-btn" onclick="clearResults()"><i class="fa fa-times"></i> Clear Results</button>
+    </div>
+    <div class="results-grid" id="resultsGrid"></div>
+  </div>
+</section>
+
+<!-- FEATURED DESTINATIONS -->
+<section id="destinations" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Where To Go</p>
+      <h2 class="section-title">Featured Destinations</h2>
+      <p class="section-sub">From ancient temples to tropical shores — discover the world's most extraordinary places</p>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cities">Cities</button>
+      <button class="filter-btn" data-filter="beaches">Beaches</button>
+      <button class="filter-btn" data-filter="temples">Temples</button>
+      <button class="filter-btn" data-filter="mountains">Mountains</button>
+      <button class="filter-btn" data-filter="adventure">Adventure</button>
+    </div>
+    <div class="destinations-grid" id="destinationsGrid"></div>
+    <div class="load-more-wrap">
+      <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreDestinations()">Load More Destinations</button>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Curated For You</p>
+      <h2 class="section-title">Travel Experiences</h2>
+      <p class="section-sub">Beyond sightseeing — immersive journeys that transform perspective</p>
+    </div>
+    <div class="experiences-grid">
+      <div class="experience-card" onclick="openExperienceModal('luxury')">
+        <div class="exp-icon"><i class="fa-solid fa-crown"></i></div>
+        <h3>Luxury Escapes</h3>
+        <p>Private villas, Michelin-starred dining, and bespoke concierge services in the world's most exclusive retreats.</p>
+        <span class="exp-tag">From $3,500/night</span>
+      </div>
+      <div class="experience-card" onclick="openExperienceModal('adventure')">
+        <div class="exp-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+        <h3>Adventure Expeditions</h3>
+        <p>Summit Himalayan peaks, dive coral atolls, or traverse Arctic tundra with expert-led expeditions.</p>
+        <span class="exp-tag">7–21 Day Trips</span>
+      </div>
+      <div class="experience-card" onclick="openExperienceModal('culture')">
+        <div class="exp-icon"><i class="fa-solid fa-landmark"></i></div>
+        <h3>Cultural Immersion</h3>
+        <p>Live with local families, learn ancient crafts, and participate in sacred ceremonies off the beaten path.</p>
+        <span class="exp-tag">Authentic Encounters</span>
+      </div>
+      <div class="experience-card" onclick="openExperienceModal('wellness')">
+        <div class="exp-icon"><i class="fa-solid fa-spa"></i></div>
+        <h3>Wellness Retreats</h3>
+        <p>Ayurvedic sanctuaries in Bali, silent meditation retreats in Kyoto, and spa havens across the Maldives.</p>
+        <span class="exp-tag">Mind &amp; Body</span>
+      </div>
+      <div class="experience-card" onclick="openExperienceModal('culinary')">
+        <div class="exp-icon"><i class="fa-solid fa-utensils"></i></div>
+        <h3>Culinary Journeys</h3>
+        <p>Market tours, cooking masterclasses with renowned chefs, and curated wine tours through legendary vineyards.</p>
+        <span class="exp-tag">Taste the World</span>
+      </div>
+      <div class="experience-card" onclick="openExperienceModal('honeymoon')">
+        <div class="exp-icon"><i class="fa-solid fa-heart"></i></div>
+        <h3>Honeymoon Collection</h3>
+        <p>Romantic overwater bungalows, private island retreats, and sunset cruises tailored for couples.</p>
+        <span class="exp-tag">Romance &amp; Love</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD MAP STATS -->
+<section class="section section-map">
+  <div class="container">
+    <div class="map-content">
+      <div class="map-text">
+        <p class="section-eyebrow">Global Reach</p>
+        <h2 class="section-title">We Cover Every Corner of the Globe</h2>
+        <p class="section-sub">Our network of local experts spans 6 continents, ensuring authentic and unforgettable journeys wherever your heart desires.</p>
+        <div class="map-stats">
+          <div class="map-stat"><span class="map-stat-num">6</span><span class="map-stat-label">Continents</span></div>
+          <div class="map-stat"><span class="map-stat-num">50+</span><span class="map-stat-label">Countries</span></div>
+          <div class="map-stat"><span class="map-stat-num">500+</span><span class="map-stat-label">Local Experts</span></div>
+          <div class="map-stat"><span class="map-stat-num">24/7</span><span class="map-stat-label">Support</span></div>
+        </div>
+        <button class="cta-btn" onclick="openBookingModal()">Start Planning</button>
+      </div>
+      <div class="map-visual">
+        <div class="globe-wrap">
+          <div class="globe">
+            <div class="globe-ring"></div>
+            <div class="globe-ring r2"></div>
+            <div class="globe-dot" style="top:30%;left:55%"><i class="fa-solid fa-location-dot"></i><span>JP</span></div>
+            <div class="globe-dot" style="top:55%;left:20%"><i class="fa-solid fa-location-dot"></i><span>BR</span></div>
+            <div class="globe-dot" style="top:65%;left:70%"><i class="fa-solid fa-location-dot"></i><span>AU</span></div>
+            <div class="globe-dot" style="top:35%;left:45%"><i class="fa-solid fa-location-dot"></i><span>IN</span></div>
+            <div class="globe-dot" style="top:40%;left:28%"><i class="fa-solid fa-location-dot"></i><span>FR</span></div>
+            <div class="globe-dot" style="top:25%;left:35%"><i class="fa-solid fa-location-dot"></i><span>UK</span></div>
+            <div class="globe-dot" style="top:50%;left:60%"><i class="fa-solid fa-location-dot"></i><span>TH</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section section-testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Traveler Stories</p>
+      <h2 class="section-title">What Our Travelers Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">Wanderlust curated the most flawless 3-week Japan itinerary. Every detail was perfect — from the ryokan in Kyoto to the ramen tour in Tokyo. Absolutely life-changing.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div><strong>Sophia Laurent</strong><span>Tokyo &amp; Kyoto, Japan</span></div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card featured-testimonial">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">We asked for a honeymoon. We got a masterpiece. The Maldives overwater villa, the private dhow cruise, the sunrise yoga — I still get goosebumps thinking about it. Worth every penny.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div><strong>Marcus &amp; Priya Nair</strong><span>Maldives Honeymoon</span></div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">The Patagonia trekking expedition exceeded every expectation. Expert guides, breathtaking scenery, and zero logistical stress. Wanderlust truly handles it all.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">J</div>
+          <div><strong>James Okafor</strong><span>Patagonia, Argentina</span></div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-why">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">The Wanderlust Difference</p>
+      <h2 class="section-title">Why Discerning Travelers Choose Us</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-medal"></i></div>
+        <h3>Curated Perfection</h3>
+        <p>Every destination in our portfolio is personally vetted by our travel editors. No filler, only the finest.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-users"></i></div>
+        <h3>Local Expertise</h3>
+        <p>500+ on-the-ground experts ensure your experience is authentic, not tourist-trap typical.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-map"></i></div>
+        <h3>Bespoke Itineraries</h3>
+        <p>No two journeys are alike. Every trip is designed around your desires, pace, and passions.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-headset"></i></div>
+        <h3>24/7 Concierge</h3>
+        <p>Our dedicated team is always one message away, from pre-trip planning to real-time support abroad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section section-about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-img-stack">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80" alt="Travel" class="about-img about-img-main">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="Passport" class="about-img about-img-accent">
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-eyebrow">Our Story</p>
+        <h2 class="section-title">Turning Dreams Into Destinations Since 2019</h2>
+        <p>Founded by a team of seasoned explorers, Wanderlust was born from a single belief: travel should be transformative, not transactional.</p>
+        <p>Our editorial team and global network of local guides ensure every recommendation is earned through genuine experience — not sponsored placements.</p>
+        <div class="about-badges">
+          <div class="badge"><i class="fa-solid fa-award"></i> Forbes Travel Certified</div>
+          <div class="badge"><i class="fa-solid fa-certificate"></i> Condé Nast Approved</div>
+          <div class="badge"><i class="fa-solid fa-seedling"></i> Sustainable Tourism Award</div>
+        </div>
+        <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Work With Us</button>
+      </div>
+    </div>
+    <div class="team-section">
+      <div class="section-header" style="margin-top:5rem">
+        <p class="section-eyebrow">The People</p>
+        <h2 class="section-title">Meet Our Team</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar"><i class="fa-solid fa-user-tie"></i></div><h3>Michael Chen</h3><span class="team-role">Chief Executive Officer</span><p>15 years shaping luxury travel experiences across Asia and Europe.</p></div>
+        <div class="team-card"><div class="team-avatar"><i class="fa-solid fa-laptop-code"></i></div><h3>Sarah Johnson</h3><span class="team-role">Head of Technology</span><p>Building the platforms that connect travelers with extraordinary places.</p></div>
+        <div class="team-card"><div class="team-avatar"><i class="fa-solid fa-globe"></i></div><h3>David Martinez</h3><span class="team-role">Travel Content Director</span><p>Personally visited 80+ countries. Every recommendation comes from real experience.</p></div>
+        <div class="team-card"><div class="team-avatar"><i class="fa-solid fa-palette"></i></div><h3>Emma Williams</h3><span class="team-role">Creative Director</span><p>Award-winning storyteller bringing destinations to life through visual narratives.</p></div>
+        <div class="team-card"><div class="team-avatar"><i class="fa-solid fa-star"></i></div><h3>James Anderson</h3><span class="team-role">Customer Experience Lead</span><p>Ensures every traveler receives seamless, white-glove service from inquiry to return.</p></div>
+        <div class="team-card"><div class="team-avatar"><i class="fa-solid fa-leaf"></i></div><h3>Lisa Thompson</h3><span class="team-role">Sustainability Director</span><p>Pioneering eco-conscious travel partnerships across 30+ countries.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section section-newsletter">
+  <div class="container">
+    <div class="newsletter-box">
+      <p class="section-eyebrow">Stay Inspired</p>
+      <h2>Get Curated Travel Insights</h2>
+      <p>Join 40,000+ travelers who receive our weekly destination guides, exclusive deals, and insider tips.</p>
+      <div class="newsletter-form">
+        <input type="email" id="newsletterEmail" placeholder="Your email address">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Get In Touch</p>
+      <h2 class="section-title">Let's Plan Your Journey</h2>
+      <p class="section-sub">Tell us where you want to go — we'll handle everything else.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form-wrap">
+        <form onsubmit="handleContactSubmit(event)">
+          <div class="form-row">
+            <div class="form-group"><label>First Name *</label><input type="text" required placeholder="John"></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" required placeholder="Smith"></div>
+          </div>
+          <div class="form-group"><label>Email Address *</label><input type="email" required placeholder="john@example.com"></div>
+          <div class="form-group"><label>Dream Destination</label><input type="text" placeholder="Where do you want to go?"></div>
+          <div class="form-group"><label>Message *</label><textarea rows="5" required placeholder="Tell us about your ideal trip..."></textarea></div>
+          <button type="submit" class="cta-btn" style="width:100%;justify-content:center">Send Message</button>
+        </form>
+      </div>
+      <div class="contact-info-wrap">
+        <div class="contact-info-card">
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div><h4>Email</h4><p>info&#64;wanderlust.com</p><p>support&#64;wanderlust.com</p></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <div><h4>Phone</h4><p>+1 (555) 123-4567</p><p>+1 (555) 987-6543</p></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><h4>Office</h4><p>123 Travel Street</p><p>Adventure City, AC 12345, USA</p></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+            <div><h4>Hours</h4><p>Mon–Fri: 9AM–6PM EST</p><p>24/7 Emergency Line Available</p></div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="https://facebook.com" target="_blank" class="soc-link"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://instagram.com" target="_blank" class="soc-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://twitter.com" target="_blank" class="soc-link"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://youtube.com" target="_blank" class="soc-link"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://pinterest.com" target="_blank" class="soc-link"><i class="fa-brands fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><i class="fa-solid fa-paper-plane"></i> WANDERLUST</div>
+        <p>Transforming travel into unforgettable stories since 2019. Premium journeys, curated for the curious soul.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Destinations</h4>
+        <a href="#destinations">Asia Pacific</a><a href="#destinations">Europe</a>
+        <a href="#destinations">Americas</a><a href="#destinations">Africa</a><a href="#destinations">Middle East</a>
+      </div>
+      <div class="footer-links">
+        <h4>Experiences</h4>
+        <a href="#experiences">Luxury Escapes</a><a href="#experiences">Adventure</a>
+        <a href="#experiences">Cultural</a><a href="#experiences">Wellness</a><a href="#experiences">Honeymoon</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="#about">About Us</a><a href="#contact">Contact</a>
+        <a href="#">Careers</a><a href="#">Press</a><a href="#">Sustainability</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Wanderlust. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- DESTINATION MODAL -->
+<div id="destinationModal" class="modal" onclick="closeModalOnBackdrop(event,'destinationModal')">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('destinationModal')"><i class="fa fa-times"></i></button>
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="">
+      <div class="modal-img-overlay"><span id="modalCategory" class="modal-badge"></span></div>
+    </div>
+    <div class="modal-body">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-meta">
+        <span id="modalCountry"><i class="fa fa-map-marker-alt"></i> <span></span></span>
+        <span id="modalTime"><i class="fa fa-clock"></i> <span></span></span>
+        <span id="modalRating"><i class="fa fa-star"></i> <span></span></span>
+      </div>
+      <p id="modalDesc"></p>
+      <div id="modalHighlights" class="modal-highlights"></div>
+      <div class="modal-actions">
+        <button class="cta-btn" onclick="openBookingModal()"><i class="fa fa-paper-plane"></i> Book This Destination</button>
+        <button class="secondary-btn" onclick="closeModal('destinationModal')">Continue Browsing</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div id="bookingModal" class="modal" onclick="closeModalOnBackdrop(event,'bookingModal')">
+  <div class="modal-content modal-sm">
+    <button class="modal-close" onclick="closeModal('bookingModal')"><i class="fa fa-times"></i></button>
+    <div class="modal-body">
+      <div class="booking-icon"><i class="fa-solid fa-paper-plane"></i></div>
+      <h2>Plan Your Journey</h2>
+      <p>Tell us your dream — we'll craft the perfect itinerary.</p>
+      <form onsubmit="handleBookingSubmit(event)">
+        <div class="form-group"><label>Full Name *</label><input type="text" required placeholder="Your name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Desired Destination</label><input type="text" id="bookingDestination" placeholder="Anywhere, everywhere..."></div>
+        <div class="form-row">
+          <div class="form-group"><label>Travel Dates</label><input type="date"></div>
+          <div class="form-group"><label>Travelers</label><select><option>1 Person</option><option>2 People</option><option>3-5 People</option><option>6+ People</option></select></div>
+        </div>
+        <div class="form-group"><label>Budget Range</label><select><option>$1,000 - $3,000</option><option>$3,000 - $7,000</option><option>$7,000 - $15,000</option><option>$15,000+</option></select></div>
+        <button type="submit" class="cta-btn" style="width:100%;justify-content:center;margin-top:1rem">Request Itinerary</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE MODAL -->
+<div id="experienceModal" class="modal" onclick="closeModalOnBackdrop(event,'experienceModal')">
+  <div class="modal-content modal-sm">
+    <button class="modal-close" onclick="closeModal('experienceModal')"><i class="fa fa-times"></i></button>
+    <div class="modal-body" id="experienceModalBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fa fa-chevron-up"></i>
+</button>
+
+<script src="travel_recommendation.js"></script>
+</body>
+</html>
