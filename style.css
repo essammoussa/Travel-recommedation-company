@@ -612,7 +612,7 @@ nav.scrolled {
 }
 .experience-card:hover::after { opacity: 1; }
 .experience-card:hover .exp-icon {
-    transform: scale(1.18) rotate(-5deg);
+    transform: scale(1.18);
     filter: drop-shadow(0 0 14px rgba(201,168,76,0.5));
     background: rgba(201,168,76,0.2);
     border-color: rgba(201,168,76,0.5);

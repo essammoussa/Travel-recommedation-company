@@ -1,7 +1,4 @@
-/* ============================================
-   WANDERLUST — travel_recommendation.js
-   Reads from embedded JSON, handles all UI
-============================================ */
+
 
 // ==================== DATA ====================
 const travelData = {
